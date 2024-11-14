@@ -1,14 +1,15 @@
 import { NextFunction, Request, Response } from "express"
 import { ContactService } from "../services/contactService"
-import { Contact } from "lucide-react";
+
 
 
 export const createContact = async(req: Request,res: Response, next: NextFunction) => {
     try{
         const body = req.body;
-        const contact = await ContactService.createContact(body);
-        res.status(201).json(contact);
+        const contacts= await ContactService.createContact(body);
+        res.status(201).json(contacts);
     }catch(error){
+        res.status(500).json({ error: 'Internal server error' });
         next(error);
     }
 }
@@ -19,7 +20,8 @@ export const getContacts = async(req:Request, res: Response, next: NextFunction)
         const contacts = await ContactService.getAllContacts();
         res.json(contacts);
     }catch(error){
-        next(error);
+        res.status(500).json({ error: 'Internal server error' });
+        next(error)
     }
 
 }
@@ -27,29 +29,30 @@ export const getContacts = async(req:Request, res: Response, next: NextFunction)
 
 export const getContactbyId = async(req: Request, res: Response, next: NextFunction) => {
     try{
-
-        const contact = await ContactService.getContactbyId(Number(req.params.id));
+        const id = parseInt(req.params.id);
+        const contact = await ContactService.getContactbyId(id);
         if (!contact){
-            return res.status(404).json({
-                message: 'Contact not found'
-            })
+            res.status(404).json({ error: 'Contact not found' });
         }
         res.json(contact);
     }catch(error){
+        res.status(500).json({ error: 'Internal server error' });
         next(error);
     }
 }
 
 export const updateContacts = async(req:Request, res: Response, next: NextFunction) => {
     try{
-        const updatedContact = await ContactService.updateContact(Number(req.params.id), req.body);
+        const id = parseInt(req.params.id)
+        const updatedContact = await ContactService.updateContact(id, req.body);
         if (!updatedContact){
-            return res.status(404).json({
+            res.status(404).json({
                 message: 'Contact not found'
             })
         }
         res.json(updatedContact)
     }catch(error){
+        res.status(500).json({ error: 'Internal server error' });
         next(error);
     }
 }
@@ -58,12 +61,13 @@ export const deleteContacts = async(req:Request, res: Response, next: NextFuncti
     try{
         const deletedContact = await ContactService.deleteContact(Number(req.params.id))
         if (!deletedContact) {
-            return res.status(404).json({
+            res.status(404).json({
                 message: 'Contact not found'
             })
         }
         res.json({message: 'Contact deleted successfully'})
     }catch(error){
+        res.status(500).json({ error: 'Internal server error' });
         next(error);
     }
 
