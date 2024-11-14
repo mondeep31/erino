@@ -3,10 +3,6 @@ import { createContact, deleteContacts, getContacts, updateContacts, getContactb
 
 const router = express.Router();
 
-router.get("/contacts", (req,res) => {
-
-
-})
 
 router.post('/contacts', createContact);
 router.get('/contacts', getContacts);
