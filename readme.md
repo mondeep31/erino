@@ -4,7 +4,7 @@ Hey There! I did it as a practice project in TypeScript with React.js and Node.j
 
 https://github.com/user-attachments/assets/3076b096-2b2c-4e47-bbbc-12ce51e6ba53
 
-### How to run this project
+### How to run this project?
 
 ```
 git pull https://github.com/mondeep31/erino.git
@@ -38,6 +38,6 @@ and if you make any changes, you need to run
 npx prisma migrate dev
 ```
 
-### My choice of the stack
+### Why this stack?
 
 I could've used PostgreSQL directly, but I wanted to enhance my knowledge in ORM, so i decided to use PrismaORM.
