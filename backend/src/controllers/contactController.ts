@@ -17,9 +17,7 @@ export const createContact = async(req: Request,res: Response, next: NextFunctio
 
 export const getContacts = async(req:Request, res: Response, next: NextFunction) => {
     try{
-
         const contacts = await ContactService.getAllContacts();
-
         res.json(contacts);
     }catch(error){
         // res.status(500).json({ error: 'Internal server error' });
