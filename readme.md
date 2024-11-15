@@ -37,3 +37,7 @@ and if you make any changes, you need to run
 ```
 npx prisma migrate dev
 ```
+
+### My choice of the stack
+
+I could've used PostgreSQL directly, but I wanted to enhance my knowledge in ORM, so i decided to use PrismaORM.
